@@ -20,8 +20,8 @@ from rclpy.node import Node
 from geometry_msgs.msg import Twist
 try:
     import RPi.GPIO as GPIO
-except:
-    import Mock.GPIO as GPIO # for testing on non-raspberry pi hardware
+except Exception:
+    import Mock.GPIO as GPIO
 
 
 class Motor():
@@ -41,7 +41,7 @@ class Motor():
         try:
             self.pwm_A = GPIO.PWM(self.Motor_A_EN, 2000)
             self.pwm_B = GPIO.PWM(self.Motor_B_EN, 2000)
-        except:
+        except Exception:
             pass
 
     def stop(self):  # Motor stops
@@ -156,7 +156,7 @@ def main(args=None):
         # (optional - otherwise it will be done automatically
         # when the garbage collector destroys the node object)
         print('KeyboardInterrupt')
-    except:
+    except Exception:
         print('other error', sys.exc_info()[0])
     finally:
         twist_subscriber.destroy_node()
