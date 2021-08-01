@@ -21,6 +21,7 @@ setup(
     entry_points={
         'console_scripts': [
             'subscriber_twist = tank.subscriber_twist:main',
+            'publisher_sonar = tank.publisher_sonar:main',
         ],
     },
 )
