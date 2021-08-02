@@ -4,7 +4,7 @@ FROM althack/ros2:foxy-dev
 #
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt update \
-   && apt -y install --no-install-recommends git-flow \
+   && apt -y install --no-install-recommends git-flow ros-foxy-webots-ros2 \
    #
    # Clean up
    && apt autoremove -y \
