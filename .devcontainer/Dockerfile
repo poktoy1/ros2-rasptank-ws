@@ -4,7 +4,11 @@ FROM althack/ros2:foxy-dev
 #
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt update \
-   && apt -y install --no-install-recommends git-flow ros-foxy-webots-ros2 \
+   && apt -y install --no-install-recommends software-properties-common git-flow ros-foxy-webots-ros2 \
+   && wget -qO- https://cyberbotics.com/Cyberbotics.asc | sudo apt-key add - \
+   && apt-add-repository 'deb https://cyberbotics.com/debian/ binary-amd64/' \
+   && apt update \
+   && apt install -y webots \
    #
    # Clean up
    && apt autoremove -y \
