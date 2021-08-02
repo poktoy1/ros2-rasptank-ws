@@ -8,3 +8,6 @@ repositories:
     type: git
     url: https://github.com/ros2/examples.git
     version: foxy
+  webots:
+    type: git
+    url: https://github.com/cyberbotics/webots_ros2.git
