@@ -70,7 +70,7 @@ class Motor():
         right_forward = right > 0
 
         in_min = 0
-        in_max = 200
+        in_max = 100
         out_min = 0
         out_max = 100
 
@@ -118,7 +118,7 @@ class TwistSubscriber(Node):
         super().__init__('twist_subscriber')
         self.subscription = self.create_subscription(
             Twist,
-            '/turtle1/cmd_vel',
+            '/cmd_vel',
             self.listener_callback,
             10)
         self.subscription  # prevent unused variable warning
@@ -135,10 +135,14 @@ class TwistSubscriber(Node):
             self.motor.stop()
             self.last_time_received = time.time()
 
-    def listener_callback(self, msg):
+    def listener_callback(self, msg: Twist):
+
+        print(f'linear.x:{msg.linear.x},right:{msg.angular.z}')
 
         left = (msg.linear.x + msg.angular.z) * 100
         right = (msg.linear.x - msg.angular.z) * 100
+
+        print(f'left:{left},right:{right}')
 
         self.motor.move(left, right)
         self.last_time_received = time.time()

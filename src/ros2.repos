@@ -1,6 +1,6 @@
 # List of repositories to use within your workspace
 # See https://github.com/dirk-thomas/vcstool
-############ 
+############
 # Example:
 ############
 repositories:
@@ -11,3 +11,12 @@ repositories:
   webots:
     type: git
     url: https://github.com/cyberbotics/webots_ros2.git
+  moveit2:
+    type: git
+    url: https://github.com/ros-planning/moveit2.git
+  moveit2_tutorials:
+    type: git
+    url: https://github.com/ros-planning/moveit2_tutorials.githttps://github.com/ros-planning/moveit2_tutorials.git
+  teleop_keyboard:
+    type: git
+    url: https://github.com/ros2/teleop_twist_keyboard.git
