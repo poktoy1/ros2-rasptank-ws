@@ -22,6 +22,7 @@ setup(
         'console_scripts': [
             'subscriber_twist = tank.subscriber_twist:main',
             'publisher_sonar = tank.publisher_sonar:main',
+            'publisher_line_infrared = tank.publisher_line_infrared:main',
         ],
     },
 )
