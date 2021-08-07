@@ -5,7 +5,7 @@ import sys
 
 import rclpy
 from rclpy.node import Node
-from sensor_msgs.msg import Int8
+from std_msgs.msg import Int8
 
 try:
     import RPi.GPIO as GPIO
