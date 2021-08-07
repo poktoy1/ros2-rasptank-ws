@@ -51,17 +51,16 @@ class Sonar():
         self.last_saved_time = time.time()
         current_time = 0.0
 
-        gpio_input = GPIO.input(self.ECHO)
-        while (not gpio_input and (current_time < self.SONAR_TIMEOUT)):
+        
+        while (not GPIO.input(self.ECHO) and (current_time < self.SONAR_TIMEOUT)):
             current_time = time.time() - self.last_saved_time
             pass
         echo_off_time = time.time()
 
         self.last_saved_time = time.time()
-        current_time = 0.0
-        gpio_input = GPIO.input(self.ECHO)
+        current_time = 0.0        
 
-        while (gpio_input and (current_time < self.SONAR_TIMEOUT)):
+        while (GPIO.input(self.ECHO) and (current_time < self.SONAR_TIMEOUT)):
             current_time = time.time() - self.last_saved_time
             pass
         echo_on_time = time.time()
