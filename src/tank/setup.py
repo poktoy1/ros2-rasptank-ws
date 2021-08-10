@@ -21,6 +21,7 @@ setup(
     entry_points={
         'console_scripts': [
             'subscriber_twist = tank.subscriber_twist:main',
+            'subscriber_arm = tank.subscriber_arm:main',
             'publisher_sonar = tank.publisher_sonar:main',
             'publisher_line_infrared = tank.publisher_line_infrared:main',
         ],
