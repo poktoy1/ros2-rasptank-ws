@@ -5,7 +5,8 @@ FROM althack/ros2:foxy-dev
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt update && apt upgrade -y && rosdep update \
    && apt -y install --no-install-recommends nvidia-driver-470 software-properties-common \
-   git-flow ros-foxy-webots-ros2 \
+   git-flow ros-foxy-webots-ros2 ros-foxy-realtime-tools ros-foxy-xacro ros-foxy-angles \
+   ros-foxy-tf-transformations \ 
    && wget -qO- https://cyberbotics.com/Cyberbotics.asc | sudo apt-key add - \
    && apt-add-repository 'deb https://cyberbotics.com/debian/ binary-amd64/' \
    && apt update && apt upgrade \
@@ -17,7 +18,8 @@ RUN apt update && apt upgrade -y && rosdep update \
    && rm -rf /var/lib/apt/lists/* \
    && pip3 install rpi.gpio \
    && pip3 install mock.gpio \
-   && pip3 install opencv-python
+   && pip3 install opencv-python \
+   && pip3 install transforms3d
    
 
 ENV DEBIAN_FRONTEND=dialog

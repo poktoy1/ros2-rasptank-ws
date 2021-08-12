@@ -32,4 +32,10 @@ repositories:
   turtlebot3:
     type: git
     url: https://github.com/ROBOTIS-GIT/turtlebot3.git
+  ros2_demos:
+    type: git
+    url: https://github.com/ros2/demos.git
+  tf_transformations:
+    type: git
+    url: https://github.com/DLu/tf_transformations.git
   
