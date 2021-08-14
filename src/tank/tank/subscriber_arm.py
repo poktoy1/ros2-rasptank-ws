@@ -1,8 +1,5 @@
 
-try:
-    from adafruit_servokit import ServoKit
-except Exception:
-    pass
+
 import rclpy
 from rclpy.node import Node
 from tf2_msgs.msg import TFMessage
