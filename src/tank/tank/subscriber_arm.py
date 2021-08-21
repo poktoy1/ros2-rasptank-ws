@@ -1,5 +1,5 @@
 
-
+import asyncio
 import rclpy
 from rclpy.node import Node
 from tf2_msgs.msg import TFMessage
@@ -34,14 +34,15 @@ class SubscriberArm(Node):
         for transformStamped in transforms:
 
             deg = self.get_deg(transformStamped)
-            if(transformStamped.child_frame_id == 'single_rrbot_link2'):
-                JOINT_SHOULDER['angle'] = deg
-                self.servo_arm_.moveJoint(**JOINT_SHOULDER)
-            elif (transformStamped.child_frame_id == 'single_rrbot_link3'):
-                JOINT_ELBOW['angle'] = deg
-                self.servo_arm_.moveJoint(**JOINT_ELBOW)
+            if(transformStamped.child_frame_id == 'link1'):
+                JOINT_SHOULDER.angle = deg
+                # self.servo_arm_.moveJoint(**JOINT_SHOULDER)
+            elif (transformStamped.child_frame_id == 'link2'):
+                JOINT_ELBOW.angle = deg
+                # self.servo_arm_.moveJoint(**JOINT_ELBOW)
         
         # self.servo_arm_.moveJoint(**JOINT_ELBOW)
+        asyncio.run(self.servo_arm_.run_servos([JOINT_ELBOW, JOINT_SHOULDER]))
 
     def get_deg(self, transformStamped: TransformStamped):
         quaternion: Quaternion = transformStamped.transform.rotation

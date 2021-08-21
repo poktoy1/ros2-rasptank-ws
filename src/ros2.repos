@@ -32,10 +32,15 @@ repositories:
   turtlebot3:
     type: git
     url: https://github.com/ROBOTIS-GIT/turtlebot3.git
+    version: foxy-devel
   ros2_demos:
     type: git
     url: https://github.com/ros2/demos.git
   tf_transformations:
     type: git
     url: https://github.com/DLu/tf_transformations.git
+  geometry_tutorials:
+    type: git
+    url: https://github.com/ros/geometry_tutorials.git
+    version: ros2
   
