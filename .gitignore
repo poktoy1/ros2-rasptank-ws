@@ -2,3 +2,6 @@ build/*
 install/*
 log/*
 site/*
+src/examples/*
+src/webots/*
+src/moveit2/*

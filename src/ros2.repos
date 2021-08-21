@@ -1,6 +1,6 @@
 # List of repositories to use within your workspace
 # See https://github.com/dirk-thomas/vcstool
-############ 
+############
 # Example:
 ############
 repositories:
@@ -8,3 +8,39 @@ repositories:
     type: git
     url: https://github.com/ros2/examples.git
     version: foxy
+  webots:
+    type: git
+    url: https://github.com/cyberbotics/webots_ros2.git
+  moveit2:
+    type: git
+    url: https://github.com/ros-planning/moveit2.git
+  moveit2_tutorials:
+    type: git
+    url: https://github.com/ros-planning/moveit2_tutorials.git
+  teleop_keyboard:
+    type: git
+    url: https://github.com/ros2/teleop_twist_keyboard.git
+  ros2_control:
+    type: git
+    url: https://github.com/ros-controls/ros2_control
+  ros2_controllers:
+    type: git
+    url: https://github.com/ros-controls/ros2_controllers
+  ros2_control_demos:
+    type: git
+    url: https://github.com/ros-controls/ros2_control_demos
+  turtlebot3:
+    type: git
+    url: https://github.com/ROBOTIS-GIT/turtlebot3.git
+    version: foxy-devel
+  ros2_demos:
+    type: git
+    url: https://github.com/ros2/demos.git
+  tf_transformations:
+    type: git
+    url: https://github.com/DLu/tf_transformations.git
+  geometry_tutorials:
+    type: git
+    url: https://github.com/ros/geometry_tutorials.git
+    version: ros2
+  

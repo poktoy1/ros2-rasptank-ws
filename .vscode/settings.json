@@ -3,11 +3,19 @@
     "editor.rulers": [
         100
     ],
-    "editor.defaultFormatter": "zachflower.uncrustify",
+    // "editor.defaultFormatter": "zachflower.uncrustify",
     "files.associations": {
         "*.repos": "yaml",
         "*.world": "xml",
-        "*.xacro": "xml"
+        "*.xacro": "xml",
+        "*.tcc": "cpp",
+        "fstream": "cpp",
+        "iosfwd": "cpp",
+        "istream": "cpp",
+        "limits": "cpp",
+        "shared_mutex": "cpp",
+        "sstream": "cpp",
+        "streambuf": "cpp"
     },
     // Autocomplete from ros python packages
     "python.autoComplete.extraPaths": [
