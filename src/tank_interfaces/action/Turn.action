@@ -1,0 +1,5 @@
+float32 angular_velocity
+---
+float32[] angular_velocity_result
+---
+float32[] partial_angular_velocity
