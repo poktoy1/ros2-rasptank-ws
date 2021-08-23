@@ -20,6 +20,7 @@ from rclpy.node import Node
 from geometry_msgs.msg import Twist
 from tank.motor import Motor
 
+
 class TwistSubscriber(Node):
 
     def __init__(self, motor: Motor):
@@ -32,14 +33,14 @@ class TwistSubscriber(Node):
         self.subscription  # prevent unused variable warning
         self.motor = motor
         self.get_logger().info('init')
-        timer_period = 0.5  # seconds
+        timer_period = 0.2  # seconds
         self.last_time_received = time.time()
         self.timer = self.create_timer(timer_period, self.timer_callback)
 
     def timer_callback(self):
         current_time = time.time() - self.last_time_received
 
-        if(current_time > 1):
+        if(current_time > 0.5):
             self.motor.stop()
             self.last_time_received = time.time()
 
