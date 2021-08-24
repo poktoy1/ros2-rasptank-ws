@@ -25,7 +25,8 @@ setup(
             'publisher_sonar = tank.publisher_sonar:main',
             'publisher_line_infrared = tank.publisher_line_infrared:main',
             'action_turn_server = tank.action_turn_server:main',
-            'action_turn_client = tank.action_turn_client:main'
+            'action_turn_client = tank.action_turn_client:main',
+            'tank_control = tank.tank_control:main',
         ],
     },
 )

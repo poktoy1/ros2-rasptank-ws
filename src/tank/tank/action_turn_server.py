@@ -10,12 +10,14 @@ from rclpy.executors import MultiThreadedExecutor
 from rclpy.callback_groups import MutuallyExclusiveCallbackGroup
 from tank_interfaces.action import Turn
 from sensor_msgs.msg import Range
+from geometry_msgs.msg import Twist
 
 
 class ActionTurnServer(Node):
 
     def __init__(self):
         super().__init__('action_turn_server')
+        self._goal = Turn.Goal()
         self._goal_handle: ServerGoalHandle = None
         self._goal_lock = threading.Lock()
         self._sonar_msg: Range
@@ -39,6 +41,13 @@ class ActionTurnServer(Node):
         )
         self._sonar_subscriber
 
+        self._twist_publisher = self.create_publisher(
+            msg_type=Twist,
+            topic='cmd_vel',
+            qos_profile=10
+        )
+        
+
     def listener_callback(self, msg: Range):
         # self.get_logger().info('sonar range:{0}'.format(msg.range))
         self._sonar_msg = msg
@@ -50,7 +59,7 @@ class ActionTurnServer(Node):
     def execute_callback(self, goal_handle: ServerGoalHandle):
         self.get_logger().info('Executing goal...')
         feedback_msg = Turn.Feedback()
-
+        
         for i in range(1, 10):
             if (not goal_handle.is_active):
                 self.get_logger().info('Goal Aborted')
@@ -60,11 +69,17 @@ class ActionTurnServer(Node):
                 self.get_logger().info('Goal canceled')
                 return Turn.Result()
             if(self._sonar_msg.range < self._sonar_msg.min_range):
-                feedback_msg.partial_angular_velocity.append(-1.0)
+
+                feedback_msg.partial_angular_velocity.append(self._goal.angular_velocity)
                 goal_handle.publish_feedback(feedback=feedback_msg)
+                
             else:
                 break
             self.get_logger().info('Publishing feedback: {0}'.format(feedback_msg))
+            twist = Twist()
+            twist.linear.x = 0.0
+            twist.angular.z = self._goal.angular_velocity
+            self._twist_publisher.publish(twist)
             time.sleep(1)
 
         goal_handle.succeed()
@@ -74,7 +89,8 @@ class ActionTurnServer(Node):
         return result
 
     def goal_callback(self, goal_request):
-        self.get_logger().info(f'received goal request')
+        self.get_logger().info('received goal request:{0}'.format(goal_request))
+        self._goal = goal_request
         return GoalResponse.ACCEPT
 
     def handle_accepted_callback(self, goal_handle: ServerGoalHandle):
