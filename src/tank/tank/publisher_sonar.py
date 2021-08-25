@@ -14,8 +14,6 @@
 # limitations under the License.
 
 import sys
-import time
-
 import rclpy
 from rclpy.node import Node
 from tank.sonar import Sonar

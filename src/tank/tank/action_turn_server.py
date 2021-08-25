@@ -20,7 +20,7 @@ class ActionTurnServer(Node):
         self._goal = Turn.Goal()
         self._goal_handle: ServerGoalHandle = None
         self._goal_lock = threading.Lock()
-        self._sonar_msg: Range
+        self._sonar_msg: Range = None
         self._action_server = ActionServer(
             node=self,
             action_type=Turn,
@@ -46,10 +46,9 @@ class ActionTurnServer(Node):
             topic='cmd_vel',
             qos_profile=10
         )
-        
 
     def listener_callback(self, msg: Range):
-        # self.get_logger().info('sonar range:{0}'.format(msg.range))
+
         self._sonar_msg = msg
 
     def destroy(self):
@@ -59,9 +58,9 @@ class ActionTurnServer(Node):
     def execute_callback(self, goal_handle: ServerGoalHandle):
         self.get_logger().info('Executing goal...')
         feedback_msg = Turn.Feedback()
-        
+
         for i in range(1, 10):
-            if (not goal_handle.is_active):
+            if (not goal_handle.is_active) or self._sonar_msg is None:
                 self.get_logger().info('Goal Aborted')
                 return Turn.Result()
             if goal_handle.is_cancel_requested:
@@ -69,10 +68,9 @@ class ActionTurnServer(Node):
                 self.get_logger().info('Goal canceled')
                 return Turn.Result()
             if(self._sonar_msg.range < self._sonar_msg.min_range):
-
                 feedback_msg.partial_angular_velocity.append(self._goal.angular_velocity)
                 goal_handle.publish_feedback(feedback=feedback_msg)
-                
+
             else:
                 break
             self.get_logger().info('Publishing feedback: {0}'.format(feedback_msg))

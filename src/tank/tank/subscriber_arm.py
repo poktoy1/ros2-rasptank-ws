@@ -8,7 +8,8 @@ from geometry_msgs.msg import Quaternion
 import tf_transformations
 from math import degrees as Degrees
 from tank.servo_arm import ServoArm
-from tank.servo_arm import JOINT_ELBOW,JOINT_GRIP,JOINT_SHOULDER,JOINT_WRIST
+from tank.servo_arm import JOINT_ELBOW, JOINT_GRIP, JOINT_SHOULDER, JOINT_WRIST
+
 
 class SubscriberArm(Node):
 
@@ -16,9 +17,7 @@ class SubscriberArm(Node):
         super().__init__('arm_subscriber')
         self.servo_arm_ = servoArm
         self.i = 0
-        # test
-        # timer_period = 0.7  # seconds
-        # self.timer = self.create_timer(timer_period, self.timer_callback)
+
         self.dec_flag_ = False
         self.still_moving = False
         self.subscription = self.create_subscription(
@@ -40,14 +39,14 @@ class SubscriberArm(Node):
             elif (transformStamped.child_frame_id == 'link2'):
                 JOINT_ELBOW.angle = deg
                 # self.servo_arm_.moveJoint(**JOINT_ELBOW)
-        
+
         # self.servo_arm_.moveJoint(**JOINT_ELBOW)
         asyncio.run(self.servo_arm_.run_servos([JOINT_ELBOW, JOINT_SHOULDER]))
 
     def get_deg(self, transformStamped: TransformStamped):
         quaternion: Quaternion = transformStamped.transform.rotation
         print(f'{transformStamped.child_frame_id}:{quaternion}')
-        r,p,y = tf_transformations.euler_from_quaternion(
+        r, p, y = tf_transformations.euler_from_quaternion(
             [quaternion.w, quaternion.x, quaternion.y, quaternion.z])
         # print(f'euler:{r},{p},{y}')
         deg = Degrees(p)
@@ -55,9 +54,8 @@ class SubscriberArm(Node):
         print(f'deg:{deg}, angle:{angle}')
         return angle
 
-
     def timer_callback(self):
-        if(self.still_moving == False):
+        if(self.still_moving is False):
             self.still_moving = True
             if(self.i > 180):
                 self.dec_flag_ = True
@@ -80,7 +78,6 @@ class SubscriberArm(Node):
         self.servo_arm_.moveJoint(**JOINT_ELBOW)
         self.servo_arm_.moveJoint(**JOINT_SHOULDER)
         print(f'i:${self.i}')
-
 
 
 def main(args=None):
