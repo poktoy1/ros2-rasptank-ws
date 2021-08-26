@@ -9,7 +9,7 @@ RUN apt update && apt upgrade -y && rosdep update \
    ros-foxy-tf-transformations \ 
    && wget -qO- https://cyberbotics.com/Cyberbotics.asc | sudo apt-key add - \
    && apt-add-repository 'deb https://cyberbotics.com/debian/ binary-amd64/' \
-   && apt update && apt upgrade \
+   && apt update && apt upgrade && rosdep update \
    && apt install -y webots python3-rosdep2 python3-vcstool \
    #
    # Clean up
@@ -21,6 +21,7 @@ RUN apt update && apt upgrade -y && rosdep update \
    && pip3 install opencv-python \
    && pip3 install transforms3d
    
+RUN sudo usermod -a -G video ros
 
 ENV DEBIAN_FRONTEND=dialog
 

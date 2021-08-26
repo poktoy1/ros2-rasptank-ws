@@ -27,6 +27,8 @@ setup(
             'action_turn_server = tank.action_turn_server:main',
             'action_turn_client = tank.action_turn_client:main',
             'tank_control = tank.tank_control:main',
+            'camera_pub = tank.camera_pub:main',
+            'camera_sub = tank.camera_sub:main',
         ],
     },
 )

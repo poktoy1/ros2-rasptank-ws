@@ -17,6 +17,7 @@ repositories:
   moveit2_tutorials:
     type: git
     url: https://github.com/ros-planning/moveit2_tutorials.git
+    version: foxy-branch
   teleop_keyboard:
     type: git
     url: https://github.com/ros2/teleop_twist_keyboard.git
@@ -43,4 +44,9 @@ repositories:
     type: git
     url: https://github.com/ros/geometry_tutorials.git
     version: ros2
+  cv_bridge:
+    type: git
+    url: https://github.com/ros-perception/vision_opencv.git
+    version: ros2
+  
   
