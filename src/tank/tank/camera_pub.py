@@ -9,10 +9,12 @@ from cv_bridge import CvBridge
 
 class CamPublisher(Node):
 
-    def __init__(self, camera_device: int):
+    def __init__(self, camera_device: int, width = 160, height = 128):
         super().__init__('sonar_publisher')
         self._publisher = self.create_publisher(Image, 'camera', 10)
         self._cap: VideoCapture = VideoCapture(camera_device)
+        self._cap.set(3, width)
+        self._cap.set(4, height)
         self._bridge = CvBridge()
         timer_period = 0.1  # seconds
 
@@ -25,7 +27,7 @@ class CamPublisher(Node):
         self.get_logger().info('camera read:{0}'.format(result))
 
     def clean_up(self):
-
+        self._cap.release()
         self._publisher.destroy()
         super().destroy_node()
 
